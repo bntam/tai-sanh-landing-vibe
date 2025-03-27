@@ -68,7 +68,7 @@ const Index = () => {
             </div>
             <div className="text-right">
               <p className="text-white/70 text-sm">
-                © {new Date().getFullYear()} Phòng chẩn trị y học cổ truyền Tái Sanh
+              © YHCT Tái Sanh {new Date().getFullYear()}
               </p>
             </div>
           </div>

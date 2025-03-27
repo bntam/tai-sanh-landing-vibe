@@ -9,13 +9,13 @@ const Doctors = () => {
       name: "Lương y Nguyễn Cao Định",
       title: "Chủ phòng khám",
       bio: "Với bề dày kinh nghiệm và tâm huyết trong nghề, nhiều năm tận tâm hành nghề cứu chữa, giúp đỡ nhiều bệnh nhân.",
-      imageSrc: "/lovable-uploads/doctor1.jpg",
+      imageSrc: "/uploads/doctor1.jpg",
     },
     {
       name: "Ths.Bs. Nguyễn Trần Anh Thư",
       title: "Bác sĩ Y học cổ truyền",
-      bio: "Kinh nghiệm làm việc, nguyên cứu tại nhiều phòng khám lớn ở Hồ Chí Minh, hiện công tác tại Bệnh viện Y học cổ truyền Phú Yên.",
-      imageSrc: "/lovable-uploads/doctor2.jpg",
+      bio: "Kinh nghiệm làm việc, nguyên cứu tại nhiều phòng khám lớn ở Hồ Chí Minh, hiện công tác tại Bệnh viện YHCT Phú Yên.",
+      imageSrc: "/uploads/doctor2.jpg",
     },
   ];
 
@@ -35,10 +35,10 @@ const Doctors = () => {
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
               Đội ngũ y bác sĩ tại{" "}
-              <span className="text-taisan">Tái Sanh</span>
+              <span className="text-taisan">YHCT Tái Sanh</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Chúng tôi tự hào với đội ngũ y bác sĩ có chuyên môn cao và tâm huyết, 
+              Phòng khám tự hào với đội ngũ y bác sĩ có chuyên môn cao và tâm huyết, 
               luôn đặt sức khỏe của bệnh nhân lên hàng đầu.
             </p>
           </div>

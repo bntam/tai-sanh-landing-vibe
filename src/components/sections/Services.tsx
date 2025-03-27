@@ -48,10 +48,10 @@ const Services = () => {
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
               Các dịch vụ y tế tại{" "}
-              <span className="text-taisan">Tái Sanh</span>
+              <span className="text-taisan">YHCT Tái Sanh</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Chúng tôi cung cấp các dịch vụ y học cổ truyền chất lượng cao,
+              Phòng khám cung cấp các dịch vụ y học cổ truyền chất lượng cao,
               giúp bạn phục hồi sức khỏe một cách tự nhiên và bền vững.
             </p>
           </div>
@@ -77,7 +77,7 @@ const Services = () => {
                   Đặt lịch khám ngay hôm nay
                 </h3>
                 <p className="text-muted-foreground">
-                  Chúng tôi sẵn sàng tư vấn và hỗ trợ cho bạn mọi thắc mắc về sức khỏe
+                  Phòng khám sẵn sàng tư vấn và hỗ trợ cho bạn mọi thắc mắc về sức khỏe
                 </p>
               </div>
               <div>

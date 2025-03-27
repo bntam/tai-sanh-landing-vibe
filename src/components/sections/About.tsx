@@ -28,7 +28,7 @@ const About = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-card image-reveal">
                 <img
-                  src="/lovable-uploads/luong-y-nguyen-cao-dinh.jpg"
+                  src="/uploads/luong-y-nguyen-cao-dinh.jpg"
                   alt="Phòng khám Tái Sanh"
                   className="w-full h-full object-cover"
                 />
@@ -50,7 +50,7 @@ const About = () => {
           <AnimatedSection direction="right" delay={200}>
             <div className="space-y-6">
               <h3 className="heading-md text-taisan-dark">
-                Sứ mệnh của chúng tôi
+                Sứ mệnh của phòng khám
               </h3>
               <p className="text-lg text-muted-foreground">
                 Phòng Chẩn Trị Y Học Cổ Truyền Tái Sanh ra đời với sứ mệnh mang lại sức khỏe và
@@ -60,7 +60,7 @@ const About = () => {
 
               <div className="pt-4 space-y-4">
                 <h4 className="heading-sm text-taisan-dark">
-                  Những ưu điểm nổi bật của chúng tôi:
+                Lý do bạn lựa chọn Y học cổ truyền Tái Sanh:
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
@@ -87,7 +87,7 @@ const About = () => {
                     </div>
                     <p>
                       <span className="font-medium">Thuốc thiên nhiên an toàn</span> - Đạt tiêu chuẩn
-                      theo thông tư 44/2014//TT-BYT với công thức độc quyền từ 28-30 vị thuốc.
+                      theo thông tư 44/2014//TT-BYT với công thức độc quyền từ các vị thuốc.
                     </p>
                   </div>
                   <div className="flex items-start space-x-3">

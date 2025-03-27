@@ -15,7 +15,7 @@ const Contact = () => {
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
               Liên hệ với{" "}
-              <span className="text-taisan">Tái Sanh</span>
+              <span className="text-taisan">YHCT Tái Sanh</span>
             </h2>
             <p className="text-muted-foreground text-lg">
               Bạn có thể đến trực tiếp hoặc liên hệ qua điện thoại để được tư vấn và đặt lịch khám.
@@ -62,7 +62,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium mb-1">Giờ làm việc</h4>
                     <p className="text-muted-foreground">
-                    Tất cả các ngày trong tuần, cả ngày lễ <br />
+                    Tất cả các ngày trong tuần, ngày lễ <br />
                     Sáng từ 7 giờ 30 đến 11 giờ 30 <br />
                     Chiều từ 14 giờ đến 18 giờ  <i>(2 giờ chiều đến 6 giờ tối)</i>
                     </p>

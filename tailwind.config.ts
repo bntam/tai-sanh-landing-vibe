@@ -157,7 +157,7 @@ export default {
 				serif: ['Playfair Display', 'serif'],
 			},
 			backgroundImage: {
-				'hero-pattern': "url('/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png')",
+				'hero-pattern': "url('/uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png')",
 				'leaf-pattern': "linear-gradient(rgba(21, 133, 96, 0.05), rgba(21, 133, 96, 0.05)), url('/public/leaf-bg.png')",
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
