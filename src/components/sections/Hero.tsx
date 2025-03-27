@@ -19,8 +19,15 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center"
     >
-      {/* Full-width background image */}
-      <div className="absolute inset-0 -z-10 bg-[url('/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png')] bg-cover bg-center"></div>
+      {/* Full-width background image - using direct URL to ensure it loads */}
+      <div 
+        className="absolute inset-0 -z-10" 
+        style={{
+          backgroundImage: "url('/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      ></div>
       
       {/* Subtle gradient overlay to ensure any UI elements remain visible */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-taisan/20 to-taisan/40"></div>
