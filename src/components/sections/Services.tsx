@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Stethoscope, ThermometerSun, Pill, Leaf, Flask, BookOpen } from "lucide-react";
+import { Stethoscope, ThermometerSun, Pill, Leaf, Beaker, BookOpen } from "lucide-react";
 import ServiceCard from "../ui/ServiceCard";
 import AnimatedSection from "../ui/AnimatedSection";
 
@@ -29,7 +29,7 @@ const Services = () => {
     {
       title: "Bào chế thuốc",
       description: "Bào chế thuốc theo phương pháp cổ truyền, đảm bảo giữ nguyên dược tính và chất lượng thuốc.",
-      icon: <Flask size={24} />,
+      icon: <Beaker size={24} />,
     },
     {
       title: "Tư vấn sức khỏe",
