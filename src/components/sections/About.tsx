@@ -13,7 +13,7 @@ const About = () => {
               Giới thiệu
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
-              Về Phòng Chẩn Trị Y Học Cổ Truyền{" "}
+              Về Phòng Chẩn Trị YHCT{" "}
               <span className="text-taisan">Tái Sanh</span>
             </h2>
             <p className="text-muted-foreground text-lg">
@@ -60,7 +60,7 @@ const About = () => {
 
               <div className="pt-4 space-y-4">
                 <h4 className="heading-sm text-taisan-dark">
-                Lý do bạn lựa chọn Y học cổ truyền Tái Sanh:
+                Lý do bạn lựa chọn YHCT Tái Sanh:
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
