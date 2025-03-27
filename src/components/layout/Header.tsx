@@ -43,7 +43,7 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center space-x-2">
-            <img src="/uploads/cropped-logo-32x32.png" alt="Tái Sanh Logo" className="w-8 h-8" />
+            <img src="/uploads/logo-32x32.png" alt="Tái Sanh Logo" className="w-8 h-8" />
             <span className="text-taisan text-xl font-serif font-bold">
               {isMobile ? "YHCT Tái Sanh" : "Phòng chẩn trị y học cổ truyền Tái Sanh"}
             </span>

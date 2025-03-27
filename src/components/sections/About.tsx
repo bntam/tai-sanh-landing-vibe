@@ -28,7 +28,7 @@ const About = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-card image-reveal">
                 <img
-                  src="/uploads/luong-y-nguyen-cao-dinh.jpg"
+                  src="/uploads/news.jpg"
                   alt="Phòng khám Tái Sanh"
                   className="w-full h-full object-cover"
                 />
