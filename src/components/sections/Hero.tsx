@@ -20,6 +20,7 @@ const Hero = () => {
       id="hero"
       className="relative pt-24 pb-20 md:pt-32 md:pb-24 min-h-screen flex items-center"
     >
+      {/* Full-width background image with gradient overlay */}
       <div className="absolute inset-0 -z-10 bg-[url('/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png')] bg-cover bg-center"></div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-taisan/90 via-taisan/80 to-taisan/95"></div>
 
