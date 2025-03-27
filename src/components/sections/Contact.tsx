@@ -36,7 +36,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium mb-1">Địa chỉ</h4>
                     <p className="text-muted-foreground">
-                      123 Đường Nguyễn Huệ, Phường 1, TP. Tuy Hòa, Phú Yên
+                    228 Lê Lợi, Phường 5, Tuy Hòa, Phú Yên
                     </p>
                   </div>
                 </div>
@@ -62,13 +62,14 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium mb-1">Giờ làm việc</h4>
                     <p className="text-muted-foreground">
-                      Thứ Hai - Thứ Bảy: 7:30 - 17:00<br />
-                      Chủ Nhật: 8:00 - 12:00
+                    Tất cả các ngày trong tuần, cả ngày lễ <br />
+                    Sáng từ 7 giờ 30 đến 11 giờ 30 <br />
+                    Chiều từ 14 giờ đến 18 giờ  <i>(2 giờ chiều đến 6 giờ tối)</i>
                     </p>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
+                {/* <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-10 h-10 rounded-full bg-taisan/10 flex items-center justify-center mt-1 text-taisan">
                     <Mail size={20} />
                   </div>
@@ -80,7 +81,7 @@ const Contact = () => {
                       </a>
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="mt-8">
@@ -99,7 +100,7 @@ const Contact = () => {
           <AnimatedSection direction="right" delay={200}>
             <div className="aspect-video overflow-hidden rounded-xl shadow-card bg-white p-2 border border-taisan/10">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3894.3018288357897!2d109.313813975312!3d13.094984712206066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316f6cd0aaaaaaab%3A0xaaaaaabbbbbccccd!2sTuy%20H%C3%B2a%2C%20Ph%C3%BA%20Y%C3%AAn%2C%20Vietnam!5e0!3m2!1sen!2sus!4v1690000000000!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15544.487667958078!2d109.3072376!3d13.091459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316fec3ee5720071%3A0x57c2808283d0c8be!2zUGjDsm5nIENo4bqpbiBUcuG7iyBZIEjhu41jIEPhu5UgVHJ1eeG7gW4gVMOhaSBTYW5o!5e0!3m2!1svi!2s!4v1743058683051!5m2!1svi!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

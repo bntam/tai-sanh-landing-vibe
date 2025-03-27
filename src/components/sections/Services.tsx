@@ -13,7 +13,7 @@ const Services = () => {
     },
     {
       title: "Bốc thuốc đông y",
-      description: "Bốc thuốc theo đơn riêng cho từng bệnh nhân với công thức 28-30 vị thuốc thiên nhiên an toàn, hiệu quả.",
+      description: "Bốc thuốc theo đơn riêng cho từng bệnh nhân với vị thuốc thiên nhiên an toàn, hiệu quả.",
       icon: <Pill size={24} />,
     },
     {
@@ -27,8 +27,8 @@ const Services = () => {
       icon: <Leaf size={24} />,
     },
     {
-      title: "Bào chế thuốc",
-      description: "Bào chế thuốc theo phương pháp cổ truyền, đảm bảo giữ nguyên dược tính và chất lượng thuốc.",
+      title: "Phục hồi chức năng",
+      description: "Giúp bệnh nhân hồi phục sau chấn thương, phẫu thuật, kết hợp phương pháp trị liệu hiện đại và y học cổ truyền.",
       icon: <Beaker size={24} />,
     },
     {

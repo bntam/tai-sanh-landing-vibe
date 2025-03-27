@@ -7,15 +7,15 @@ const Doctors = () => {
   const doctors = [
     {
       name: "Lương y Nguyễn Cao Định",
-      title: "Người sáng lập",
-      bio: "Với bề dày kinh nghiệm và tâm huyết trong nghề, luôn sẵn sàng đi xa để khám chữa miễn phí cho người bệnh.",
-      imageSrc: "/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png",
+      title: "Chủ phòng khám",
+      bio: "Với bề dày kinh nghiệm và tâm huyết trong nghề, nhiều năm tận tâm hành nghề cứu chữa, giúp đỡ nhiều bệnh nhân.",
+      imageSrc: "/lovable-uploads/doctor1.jpg",
     },
     {
-      name: "Thạc sĩ, Bác sĩ Nguyễn Trần Anh Thư",
+      name: "Ths.Bs. Nguyễn Trần Anh Thư",
       title: "Bác sĩ Y học cổ truyền",
-      bio: "Kinh nghiệm từ các phòng khám lớn tại Hồ Chí Minh, hiện công tác tại Bệnh viện Y học cổ truyền Phú Yên.",
-      imageSrc: "/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png",
+      bio: "Kinh nghiệm làm việc, nguyên cứu tại nhiều phòng khám lớn ở Hồ Chí Minh, hiện công tác tại Bệnh viện Y học cổ truyền Phú Yên.",
+      imageSrc: "/lovable-uploads/doctor2.jpg",
     },
   ];
 

@@ -28,12 +28,12 @@ const About = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-card image-reveal">
                 <img
-                  src="/lovable-uploads/54a4eb8c-2c8a-4049-82d5-02d60f08c7ba.png"
+                  src="/lovable-uploads/luong-y-nguyen-cao-dinh.jpg"
                   alt="Phòng khám Tái Sanh"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-8 -right-6 bg-white p-4 rounded-lg shadow-card border border-taisan/10 hidden md:block">
+              {/* <div className="absolute -bottom-8 -right-6 bg-white p-4 rounded-lg shadow-card border border-taisan/10 hidden md:block">
                 <div className="flex items-center space-x-3">
                   <div className="bg-taisan-light/10 w-12 h-12 rounded-full flex items-center justify-center text-taisan">
                     <span className="text-xl font-bold">15+</span>
@@ -43,7 +43,7 @@ const About = () => {
                     <p className="text-sm text-muted-foreground">Chăm sóc bệnh nhân</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </AnimatedSection>
 

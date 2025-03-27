@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -44,7 +43,10 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center space-x-2">
-            <span className="text-taisan text-xl font-serif font-bold">Tái Sanh</span>
+            <img src="/lovable-uploads/cropped-logo-32x32.png" alt="Tái Sanh Logo" className="w-8 h-8" />
+            <span className="text-taisan text-xl font-serif font-bold">
+              {isMobile ? "Tái Sanh" : "Phòng chẩn trị y học cổ truyền Tái Sanh"}
+            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -73,12 +75,6 @@ const Header = () => {
                 className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
               >
                 Đội ngũ
-              </button>
-              <button
-                onClick={() => navigateTo("testimonials")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Đánh giá
               </button>
               <button
                 onClick={() => navigateTo("contact")}
@@ -138,12 +134,6 @@ const Header = () => {
                 className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
               >
                 Đội ngũ
-              </button>
-              <button
-                onClick={() => navigateTo("testimonials")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Đánh giá
               </button>
               <button
                 onClick={() => navigateTo("contact")}

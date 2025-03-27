@@ -44,7 +44,7 @@ const Index = () => {
         <About />
         <Services />
         <Doctors />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Contact />
       </main>
 
@@ -56,7 +56,7 @@ const Index = () => {
                 Phòng Chẩn Trị Y Học Cổ Truyền Tái Sanh
               </h3>
               <p className="text-white/70 mb-4">
-                Nơi gửi trọn niềm tin cho sức khỏe của bạn và gia đình
+                228 Lê Lợi, Phường 5, Tuy Hòa, Phú Yên
               </p>
               <a
                 href="tel:0984438960"
@@ -68,7 +68,7 @@ const Index = () => {
             </div>
             <div className="text-right">
               <p className="text-white/70 text-sm">
-                © {new Date().getFullYear()} Tái Sanh. Tất cả quyền được bảo lưu.
+                © {new Date().getFullYear()} Phòng chẩn trị y học cổ truyền Tái Sanh
               </p>
             </div>
           </div>
