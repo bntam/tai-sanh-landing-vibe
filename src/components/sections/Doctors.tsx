@@ -6,15 +6,15 @@ import AnimatedSection from "../ui/AnimatedSection";
 const Doctors = () => {
   const doctors = [
     {
-      name: "Lương y Nguyễn Cao Định",
-      title: "Chủ phòng khám",
-      bio: "Với bề dày kinh nghiệm và tâm huyết trong nghề, nhiều năm tận tâm hành nghề cứu chữa, giúp đỡ nhiều bệnh nhân.",
+      name: "Nguyễn Cao Định",
+      title: "Trưởng phòng khám - Lương y",
+      bio: "Hơn 30 năm kinh nghiệm trong lĩnh vực y học cổ truyền, chuyên gia về thuốc đông y và các phương pháp điều trị bằng y học cổ truyền.",
       imageSrc: "/uploads/doctor1.jpg",
     },
     {
-      name: "Ths.Bs. Nguyễn Trần Anh Thư",
-      title: "Bác sĩ Y học cổ truyền",
-      bio: "Kinh nghiệm làm việc, nguyên cứu tại nhiều phòng khám lớn ở Hồ Chí Minh, hiện công tác tại Bệnh viện YHCT Phú Yên.",
+      name: "Nguyễn Trần Anh Thư",
+      title: "Thạc sĩ, Bác sĩ Y học cổ truyền",
+      bio: "Kinh nghiệm làm việc tại nhiều phòng khám lớn ở Hồ Chí Minh, chuyên gia về châm cứu và cấy chỉ, kết hợp y học cổ truyền và y học hiện đại.",
       imageSrc: "/uploads/doctor2.jpg",
     },
   ];

@@ -87,7 +87,7 @@ const Header = () => {
 
           <div className="flex items-center space-x-4">
             <Button className="bg-taisan hover:bg-taisan-light text-white shadow-sm hover:shadow-md transition-all">
-              <Phone className="mr-2 h-4 w-4" /> 098 44 38 960
+              <Phone className="h-4 w-4" />098 44 38 960
             </Button>
             
             {isMobile && (
