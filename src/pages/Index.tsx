@@ -53,7 +53,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-serif mb-4">
-                Phòng Chẩn Trị YHCT Tái Sanh
+                Phòng Khám YHCT Tái Sanh
               </h3>
               <p className="text-white/70 mb-4">
                 228 Lê Lợi, Phường 5, Tuy Hòa, Phú Yên

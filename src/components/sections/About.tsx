@@ -13,12 +13,12 @@ const About = () => {
               Giới thiệu
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
-              Về Phòng Chẩn Trị YHCT{" "}
+              Về Phòng Khám YHCT{" "}
               <span className="text-taisan">Tái Sanh</span>
             </h2>
             <p className="text-muted-foreground text-lg">
               Là phòng khám đông y uy tín tại Phú Yên, hoạt động dưới sự cấp phép của Bộ Y tế
-              với hơn 15 năm kinh nghiệm.
+              với hơn 30 năm kinh nghiệm.
             </p>
           </div>
         </AnimatedSection>
@@ -28,7 +28,7 @@ const About = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-card image-reveal">
                 <img
-                  src="/uploads/news.jpg"
+                  src="/uploads/news.webp"
                   alt="Phòng khám Tái Sanh"
                   className="w-full h-full object-cover"
                 />
@@ -53,7 +53,7 @@ const About = () => {
                 Sứ mệnh của phòng khám
               </h3>
               <p className="text-lg text-muted-foreground">
-                Phòng Chẩn Trị Y Học Cổ Truyền Tái Sanh ra đời với sứ mệnh mang lại sức khỏe và
+                Phòng Khám Y Học Cổ Truyền Tái Sanh ra đời với sứ mệnh mang lại sức khỏe và
                 niềm tin cho bệnh nhân bằng phương pháp y học cổ truyền kết hợp với tinh hoa y
                 học hiện đại.
               </p>

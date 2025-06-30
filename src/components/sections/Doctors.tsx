@@ -9,13 +9,13 @@ const Doctors = () => {
       name: "Nguyễn Cao Định",
       title: "Trưởng phòng khám - Lương y",
       bio: "Hơn 30 năm kinh nghiệm trong lĩnh vực y học cổ truyền, chuyên gia về thuốc đông y và các phương pháp điều trị bằng y học cổ truyền.",
-      imageSrc: "/uploads/doctor1.jpg",
+      imageSrc: "/uploads/doctor1.webp",
     },
     {
       name: "Nguyễn Trần Anh Thư",
       title: "Thạc sĩ, Bác sĩ Y học cổ truyền",
       bio: "Kinh nghiệm làm việc tại nhiều phòng khám lớn ở Hồ Chí Minh, chuyên gia về châm cứu và cấy chỉ, kết hợp y học cổ truyền và y học hiện đại.",
-      imageSrc: "/uploads/doctor2.jpg",
+      imageSrc: "/uploads/doctor2.webp",
     },
   ];
 
