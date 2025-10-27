@@ -1,6 +1,8 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Note: Using .npmrc with legacy-peer-deps=true to handle React peer dependency conflict
+  # between decap-cms-app@3.8.4 (requires React 19) and @astrojs/react@3.6.3 (uses React 18)
 
 [build.environment]
   NODE_VERSION = "18"
