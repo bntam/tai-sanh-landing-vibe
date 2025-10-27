@@ -1,0 +1,6 @@
+# Bun configuration for Cloudflare Pages deployment
+# This file tells Bun to ignore peer dependency warnings
+
+[install]
+# Allow peer dependency mismatches (similar to npm's --legacy-peer-deps)
+peer = true
