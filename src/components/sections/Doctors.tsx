@@ -3,7 +3,24 @@ import React from "react";
 import DoctorCard from "../ui/DoctorCard";
 import AnimatedSection from "../ui/AnimatedSection";
 
-const Doctors = () => {
+interface DoctorsContent {
+  sectionLabel?: string;
+  title?: string;
+  titleHighlight?: string;
+  description?: string;
+}
+
+interface DoctorsProps {
+  content?: DoctorsContent;
+}
+
+const Doctors: React.FC<DoctorsProps> = ({ content }) => {
+  // Default values
+  const sectionLabel = content?.sectionLabel || "Đội ngũ";
+  const title = content?.title || "Đội ngũ y bác sĩ tại";
+  const titleHighlight = content?.titleHighlight || "YHCT Tái Sanh";
+  const description = content?.description || "Phòng khám tự hào với đội ngũ y bác sĩ có chuyên môn cao và tâm huyết, luôn đặt sức khỏe của bệnh nhân lên hàng đầu.";
+
   const doctors = [
     {
       name: "Nguyễn Cao Định",
@@ -31,15 +48,14 @@ const Doctors = () => {
         <AnimatedSection>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-block px-3 py-1 bg-taisan/10 text-taisan rounded-full text-sm font-medium mb-4">
-              Đội ngũ
+              {sectionLabel}
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
-              Đội ngũ y bác sĩ tại{" "}
-              <span className="text-taisan">YHCT Tái Sanh</span>
+              {title}{" "}
+              <span className="text-taisan">{titleHighlight}</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Phòng khám tự hào với đội ngũ y bác sĩ có chuyên môn cao và tâm huyết, 
-              luôn đặt sức khỏe của bệnh nhân lên hàng đầu.
+              {description}
             </p>
           </div>
         </AnimatedSection>
@@ -62,3 +78,4 @@ const Doctors = () => {
 };
 
 export default Doctors;
+

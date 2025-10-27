@@ -1,8 +1,12 @@
+# robots.txt for Phòng Khám Y Học Cổ Truyền Tái Sanh
+
 User-agent: Googlebot
 Allow: /
+Disallow: /admin/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /admin/
 
 User-agent: Twitterbot
 Allow: /
@@ -12,3 +16,8 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /_astro/
+
+# Sitemap
+Sitemap: https://phongkhamtaisanh.com/sitemap.xml

@@ -1,0 +1,244 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to main)
+
+# Uncomment below for local development
+# local_backend: true
+
+media_folder: "public/uploads" # Media files will be stored in the repo under public/uploads
+public_folder: "/uploads" # The src attribute for uploaded media will begin with /uploads
+
+locale: "vi"
+
+collections:
+  # Notification Popup Configuration
+  - name: "notification"
+    label: "Thông báo popup"
+    folder: "src/content/notifications"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Tiêu đề", name: "title", widget: "string" }
+      - { label: "Nội dung", name: "message", widget: "text" }
+      - { label: "Kích hoạt", name: "enabled", widget: "boolean", default: true }
+      - { label: "Độ trễ hiển thị (ms)", name: "displayDelay", widget: "number", default: 2000, value_type: "int" }
+      - label: "Chế độ hiển thị"
+        name: "displayMode"
+        widget: "select"
+        default: "dismissible"
+        options:
+          - { label: "Luôn hiển thị (mỗi lần truy cập)", value: "always" }
+          - { label: "Có thể tắt tạm thời", value: "dismissible" }
+        hint: "• 'Luôn hiển thị': Popup xuất hiện mỗi lần người dùng truy cập trang. • 'Có thể tắt tạm thời': Người dùng có thể tắt popup và nó sẽ ẩn trong khoảng thời gian cài đặt bên dưới."
+      - label: "Thời gian ẩn sau khi tắt (giờ)"
+        name: "dismissDuration"
+        widget: "number"
+        default: 168
+        value_type: "int"
+        hint: "Số giờ ẩn popup sau khi người dùng nhấn 'Tắt thông báo'. Ví dụ: 24 (1 ngày), 168 (7 ngày), 720 (30 ngày). CHỈ áp dụng khi chế độ là 'Có thể tắt tạm thời'."
+      - { label: "Ngày đăng", name: "date", widget: "datetime" }
+
+  # Blog Posts
+  - name: "blog"
+    label: "Bài viết"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Tiêu đề", name: "title", widget: "string" }
+      - { label: "Mô tả ngắn", name: "description", widget: "text", hint: "Mô tả này sẽ hiển thị trong kết quả tìm kiếm và khi chia sẻ trên mạng xã hội" }
+      - { label: "Ngày đăng", name: "date", widget: "datetime" }
+      - { label: "Ngày cập nhật", name: "updatedDate", widget: "datetime", required: false, hint: "Để trống nếu chưa cập nhật" }
+      - { label: "Ảnh đại diện", name: "image", widget: "image", required: false, hint: "Kích thước khuyến nghị: 1200x630px. Có thể upload ảnh hoặc nhập URL" }
+      - { label: "Tác giả", name: "author", widget: "string", default: "Phòng Khám YHCT Tái Sanh" }
+      - { label: "Ảnh tác giả", name: "authorImage", widget: "image", required: false, hint: "Upload ảnh hoặc nhập URL ảnh tác giả" }
+      - { label: "Nội dung", name: "body", widget: "markdown" }
+      - { label: "Danh mục", name: "category", widget: "select", options: ["Tin tức", "Sức khỏe", "Y học cổ truyền", "Mẹo hay"] }
+      - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Thêm các từ khóa liên quan" }
+      - { label: "Bài viết nổi bật", name: "featured", widget: "boolean", default: false }
+      - { label: "Xuất bản", name: "published", widget: "boolean", default: true }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Meta Title", name: "metaTitle", widget: "string", required: false, hint: "Để trống để sử dụng tiêu đề bài viết" }
+          - { label: "Meta Description", name: "metaDescription", widget: "text", required: false, hint: "Để trống để sử dụng mô tả ngắn" }
+          - { label: "Keywords", name: "keywords", widget: "string", required: false, hint: "Các từ khóa cách nhau bởi dấu phẩy" }
+          - { label: "Canonical URL", name: "canonicalUrl", widget: "string", required: false }
+
+  # Services
+  - name: "services"
+    label: "Dịch vụ"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Tên dịch vụ", name: "title", widget: "string" }
+      - { label: "Mô tả ngắn", name: "description", widget: "text" }
+      - { label: "Icon", name: "icon", widget: "string", hint: "Tên icon từ lucide-react (vd: Stethoscope, Heart, Activity)" }
+      - { label: "Nội dung chi tiết", name: "body", widget: "markdown" }
+      - { label: "Giá", name: "price", widget: "string", required: false }
+      - { label: "Thời gian", name: "duration", widget: "string", required: false }
+      - { label: "Thứ tự hiển thị", name: "order", widget: "number", value_type: "int", default: 0 }
+      - { label: "Hiển thị", name: "visible", widget: "boolean", default: true }
+
+  # Doctors
+  - name: "doctors"
+    label: "Đội ngũ bác sĩ"
+    folder: "src/content/doctors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Họ tên", name: "name", widget: "string" }
+      - { label: "Chức danh", name: "title", widget: "string" }
+      - { label: "Chuyên môn", name: "specialty", widget: "string" }
+      - { label: "Ảnh đại diện", name: "image", widget: "image", hint: "Upload ảnh hoặc nhập URL. Kích thước khuyến nghị: 400x400px" }
+      - { label: "Mô tả", name: "description", widget: "text" }
+      - { label: "Kinh nghiệm", name: "experience", widget: "string", required: false }
+      - { label: "Học vấn", name: "education", widget: "list", required: false }
+      - { label: "Thứ tự hiển thị", name: "order", widget: "number", value_type: "int", default: 0 }
+      - { label: "Hiển thị", name: "visible", widget: "boolean", default: true }
+
+  # Testimonials
+  - name: "testimonials"
+    label: "Đánh giá khách hàng"
+    folder: "src/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Tên khách hàng", name: "name", widget: "string" }
+      - { label: "Ảnh đại diện", name: "image", widget: "image", required: false, hint: "Upload ảnh hoặc nhập URL ảnh khách hàng" }
+      - { label: "Nội dung đánh giá", name: "content", widget: "text" }
+      - { label: "Đánh giá (1-5 sao)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+      - { label: "Ngày đánh giá", name: "date", widget: "datetime" }
+      - { label: "Hiển thị", name: "visible", widget: "boolean", default: true }
+
+  # Site Settings
+  - name: "settings"
+    label: "Cài đặt website"
+    files:
+      - label: "Thông tin chung"
+        name: "general"
+        file: "src/content/settings/general.json"
+        fields:
+          - { label: "Tên phòng khám", name: "siteName", widget: "string" }
+          - { label: "Mô tả", name: "siteDescription", widget: "text" }
+          - { label: "Địa chỉ", name: "address", widget: "string" }
+          - { label: "Số điện thoại", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - { label: "Giờ làm việc", name: "workingHours", widget: "text" }
+          - { label: "Facebook URL", name: "facebookUrl", widget: "string", required: false }
+          - { label: "Zalo URL", name: "zaloUrl", widget: "string", required: false }
+
+      - label: "Nội dung website"
+        name: "content"
+        file: "src/content/settings/content.json"
+        fields:
+          # Site Info
+          - label: "Thông tin phòng khám"
+            name: "siteInfo"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Tên phòng khám", name: "siteName", widget: "string", default: "Phòng Khám Y Học Cổ Truyền Tái Sanh" }
+              - { label: "Mô tả website", name: "siteDescription", widget: "text", default: "Phòng khám y học cổ truyền uy tín tại Tuy Hòa, Phú Yên" }
+              - { label: "Địa chỉ", name: "address", widget: "string", default: "228 Lê Lợi, Phường Tuy Hòa, Tỉnh Đắk Lắk" }
+              - { label: "Số điện thoại", name: "phone", widget: "string", default: "098 44 38 960" }
+              - { label: "Email", name: "email", widget: "string", required: false }
+              - { label: "Giờ làm việc", name: "workingHours", widget: "text", default: "Tất cả các ngày trong tuần, ngày lễ. Chiều từ 14 giờ đến 18 giờ (2 giờ chiều đến 6 giờ tối)" }
+              - { label: "Facebook URL", name: "facebookUrl", widget: "string", required: false }
+              - { label: "Zalo URL", name: "zaloUrl", widget: "string", required: false }
+
+          # Header
+          - label: "Header"
+            name: "header"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Tên ngắn (mobile)", name: "shortName", widget: "string", default: "Tái Sanh" }
+              - { label: "Tên đầy đủ", name: "fullName", widget: "string", default: "Phòng Khám YHCT Tái Sanh" }
+              - label: "Menu điều hướng"
+                name: "navigation"
+                widget: "list"
+                fields:
+                  - { label: "Nhãn", name: "label", widget: "string" }
+                  - { label: "ID phần", name: "id", widget: "string" }
+
+          # About Section
+          - label: "Giới thiệu"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Nhãn phần", name: "sectionLabel", widget: "string", default: "Giới thiệu" }
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - { label: "Tiêu đề highlight", name: "titleHighlight", widget: "string", default: "Tái Sanh" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+              - { label: "Ảnh", name: "image", widget: "image", hint: "Upload ảnh hoặc nhập URL. Kích thước khuyến nghị: 800x600px" }
+              - { label: "Tiêu đề sứ mệnh", name: "missionTitle", widget: "string", default: "Sứ mệnh của phòng khám" }
+              - { label: "Nội dung sứ mệnh", name: "missionContent", widget: "text" }
+              - { label: "Tiêu đề lý do chọn", name: "reasonsTitle", widget: "string", default: "Lý do bạn lựa chọn YHCT Tái Sanh:" }
+              - label: "Danh sách lý do"
+                name: "reasons"
+                widget: "list"
+                fields:
+                  - { label: "Tiêu đề", name: "title", widget: "string" }
+                  - { label: "Nội dung", name: "content", widget: "text" }
+
+          # Services Section
+          - label: "Dịch vụ"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Nhãn phần", name: "sectionLabel", widget: "string", default: "Dịch vụ" }
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - { label: "Tiêu đề highlight", name: "titleHighlight", widget: "string", default: "YHCT Tái Sanh" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+              - { label: "Tiêu đề CTA", name: "ctaTitle", widget: "string", default: "Đặt lịch khám ngay hôm nay" }
+              - { label: "Mô tả CTA", name: "ctaDescription", widget: "text" }
+              - { label: "Nhãn nút CTA", name: "ctaButtonLabel", widget: "string", default: "Liên hệ ngay" }
+
+          # Doctors Section
+          - label: "Đội ngũ"
+            name: "doctors"
+            widget: "object"
+            fields:
+              - { label: "Nhãn phần", name: "sectionLabel", widget: "string", default: "Đội ngũ" }
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - { label: "Tiêu đề highlight", name: "titleHighlight", widget: "string", default: "YHCT Tái Sanh" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+
+          # Contact Section
+          - label: "Liên hệ"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Nhãn phần", name: "sectionLabel", widget: "string", default: "Liên hệ" }
+              - { label: "Tiêu đề", name: "title", widget: "string" }
+              - { label: "Tiêu đề highlight", name: "titleHighlight", widget: "string", default: "YHCT Tái Sanh" }
+              - { label: "Mô tả", name: "description", widget: "text" }
+              - { label: "Tiêu đề thông tin", name: "infoTitle", widget: "string", default: "Thông tin liên hệ" }
+              - { label: "Nhãn địa chỉ", name: "addressLabel", widget: "string", default: "Địa chỉ" }
+              - { label: "Nhãn điện thoại", name: "phoneLabel", widget: "string", default: "Điện thoại" }
+              - { label: "Nhãn giờ làm việc", name: "hoursLabel", widget: "string", default: "Giờ làm việc" }
+              - { label: "Nhãn email", name: "emailLabel", widget: "string", default: "Email" }
+              - { label: "Tiêu đề bản đồ", name: "mapTitle", widget: "string", default: "Vị trí phòng khám" }
+
+          # Footer
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Bản quyền", name: "copyright", widget: "string", default: "© YHCT Tái Sanh" }
+
+          # Buttons & Labels
+          - label: "Nút và nhãn"
+            name: "buttons"
+            widget: "object"
+            fields:
+              - { label: "Gọi ngay", name: "callNow", widget: "string", default: "Gọi ngay" }
+              - { label: "Liên hệ ngay", name: "contactNow", widget: "string", default: "Liên hệ ngay" }
+              - { label: "Đọc thêm", name: "readMore", widget: "string", default: "Đọc thêm" }
+              - { label: "Xem thêm", name: "seeMore", widget: "string", default: "Xem thêm" }
+              - { label: "Quay lại", name: "goBack", widget: "string", default: "Quay lại" }
+

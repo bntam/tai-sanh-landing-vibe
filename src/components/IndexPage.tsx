@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
@@ -7,9 +6,45 @@ import Services from "@/components/sections/Services";
 import Doctors from "@/components/sections/Doctors";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
+import NotificationPopup, { type NotificationConfig } from "@/components/NotificationPopup";
 import { Phone } from "lucide-react";
 
-const Index = () => {
+interface SiteSettings {
+  siteName: string;
+  siteDescription: string;
+  address: string;
+  phone: string;
+  email?: string;
+  workingHours: string;
+  facebookUrl?: string;
+  zaloUrl?: string;
+}
+
+interface WebsiteContent {
+  siteInfo: SiteSettings;
+  header: any;
+  about: any;
+  services: any;
+  doctors: any;
+  contact: any;
+  footer: any;
+  buttons: any;
+}
+
+interface IndexPageProps {
+  notification?: NotificationConfig;
+  websiteContent?: WebsiteContent;
+  siteSettings?: SiteSettings;
+}
+
+const IndexPage: React.FC<IndexPageProps> = ({ notification, websiteContent, siteSettings }) => {
+  // Use siteSettings from websiteContent if available
+  const settings = siteSettings || websiteContent?.siteInfo || {
+    siteName: "Phòng Khám YHCT Tái Sanh",
+    address: "228 Lê Lợi, Phường Tuy Hòa, Tỉnh Đắk Lắk",
+    phone: "098 44 38 960",
+    workingHours: "Tất cả các ngày trong tuần, ngày lễ. Chiều từ 14 giờ đến 18 giờ (2 giờ chiều đến 6 giờ tối)"
+  };
   // Add a scroll to top button
   useEffect(() => {
     const handleScroll = () => {
@@ -38,14 +73,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Header />
+      {notification && <NotificationPopup config={notification} />}
+      <Header content={websiteContent?.header} />
       <main className="flex-grow">
         <Hero />
-        <About />
-        <Services />
-        <Doctors />
+        <About content={websiteContent?.about} />
+        <Services content={websiteContent?.services} siteSettings={settings} />
+        <Doctors content={websiteContent?.doctors} />
         {/* <Testimonials /> */}
-        <Contact />
+        <Contact content={websiteContent?.contact} siteSettings={settings} />
       </main>
 
       <footer className="bg-taisan-dark text-white py-10">
@@ -53,22 +89,22 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-serif mb-4">
-                Phòng Khám YHCT Tái Sanh
+                {settings.siteName}
               </h3>
               <p className="text-white/70 mb-4">
-                228 Lê Lợi, Phường 5, Tuy Hòa, Phú Yên
+                {settings.address}
               </p>
               <a
-                href="tel:0984438960"
+                href={`tel:${settings.phone.replace(/\s/g, '')}`}
                 className="inline-flex items-center space-x-2 text-taisan-gold hover:text-taisan-gold-light transition-colors"
               >
                 <Phone size={16} />
-                <span>098 44 38 960</span>
+                <span>{settings.phone}</span>
               </a>
             </div>
             <div className="text-right">
               <p className="text-white/70 text-sm">
-              © YHCT Tái Sanh {new Date().getFullYear()}
+                {websiteContent?.footer?.copyright || "© YHCT Tái Sanh"} {new Date().getFullYear()}
               </p>
             </div>
           </div>
@@ -100,14 +136,15 @@ const Index = () => {
 
       {/* Floating contact button for mobile */}
       <a
-        href="tel:0984438960"
+        href={`tel:${settings.phone.replace(/\s/g, '')}`}
         className="md:hidden fixed left-5 bottom-5 h-12 px-4 rounded-full bg-taisan shadow-lg flex items-center justify-center text-white hover:bg-taisan-light transition-colors z-50"
       >
         <Phone size={16} className="mr-2" />
-        <span>Gọi ngay</span>
+        <span>{websiteContent?.buttons?.callNow || "Gọi ngay"}</span>
       </a>
     </div>
   );
 };
 
-export default Index;
+export default IndexPage;
+

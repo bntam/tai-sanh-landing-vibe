@@ -1,0 +1,76 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Phòng Khám Y Học Cổ Truyền Tái Sanh - Điều trị bằng Y học cổ truyền",
+  description = "Phòng khám y học cổ truyền uy tín tại Tuy Hòa, Phú Yên. Chuyên điều trị bằng đông y, châm cứu, bấm huyệt với hơn 30 năm kinh nghiệm.",
+  image = "/uploads/news.webp",
+  type = "website",
+  canonical = Astro.url.pathname
+} = Astro.props;
+
+const siteUrl = Astro.site || "https://phongkhamtaisanh.com";
+const fullUrl = new URL(canonical, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+---
+
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="phòng khám đông y, y học cổ truyền, châm cứu, bấm huyệt, thuốc đông y, Tuy Hòa, Phú Yên, Đắk Lắk, điều trị bệnh, lương y" />
+    <meta name="author" content="Phòng Khám Y Học Cổ Truyền Tái Sanh" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={fullUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:site_name" content="Phòng Khám Y Học Cổ Truyền Tái Sanh" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={fullUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+
+    <!-- Netlify Identity -->
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
+

@@ -20,6 +20,8 @@ const DoctorCard = ({ name, title, bio, imageSrc, className }: DoctorCardProps) 
           src={imageSrc}
           alt={name}
           className="w-full h-72 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <CardHeader className="pb-2">

@@ -4,7 +4,36 @@ import { Stethoscope, ThermometerSun, Pill, Leaf, Beaker, BookOpen } from "lucid
 import ServiceCard from "../ui/ServiceCard";
 import AnimatedSection from "../ui/AnimatedSection";
 
-const Services = () => {
+interface ServicesContent {
+  sectionLabel?: string;
+  title?: string;
+  titleHighlight?: string;
+  description?: string;
+  ctaTitle?: string;
+  ctaDescription?: string;
+  ctaButtonLabel?: string;
+}
+
+interface SiteSettings {
+  phone?: string;
+}
+
+interface ServicesProps {
+  content?: ServicesContent;
+  siteSettings?: SiteSettings;
+}
+
+const Services: React.FC<ServicesProps> = ({ content, siteSettings }) => {
+  // Default values
+  const sectionLabel = content?.sectionLabel || "Dịch vụ";
+  const title = content?.title || "Các dịch vụ y tế tại";
+  const titleHighlight = content?.titleHighlight || "YHCT Tái Sanh";
+  const description = content?.description || "Phòng khám cung cấp các dịch vụ y học cổ truyền chất lượng cao, giúp bạn phục hồi sức khỏe một cách tự nhiên và bền vững.";
+  const ctaTitle = content?.ctaTitle || "Đặt lịch khám ngay hôm nay";
+  const ctaDescription = content?.ctaDescription || "Phòng khám sẵn sàng tư vấn và hỗ trợ cho bạn mọi thắc mắc về sức khỏe";
+  const ctaButtonLabel = content?.ctaButtonLabel || "Liên hệ ngay";
+  const phoneNumber = siteSettings?.phone || "098 44 38 960";
+
   const services = [
     {
       title: "Khám và tư vấn",
@@ -44,20 +73,19 @@ const Services = () => {
         <AnimatedSection>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-block px-3 py-1 bg-taisan/10 text-taisan rounded-full text-sm font-medium mb-4">
-              Dịch vụ
+              {sectionLabel}
             </div>
             <h2 className="heading-lg text-taisan-dark mb-4">
-              Các dịch vụ y tế tại{" "}
-              <span className="text-taisan">YHCT Tái Sanh</span>
+              {title}{" "}
+              <span className="text-taisan">{titleHighlight}</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Phòng khám cung cấp các dịch vụ y học cổ truyền chất lượng cao,
-              giúp bạn phục hồi sức khỏe một cách tự nhiên và bền vững.
+              {description}
             </p>
           </div>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
           {services.map((service, index) => (
             <AnimatedSection key={index} delay={index * 100}>
               <ServiceCard
@@ -74,18 +102,18 @@ const Services = () => {
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               <div className="md:flex-1">
                 <h3 className="heading-sm text-taisan-dark mb-2">
-                  Đặt lịch khám ngay hôm nay
+                  {ctaTitle}
                 </h3>
                 <p className="text-muted-foreground">
-                  Phòng khám sẵn sàng tư vấn và hỗ trợ cho bạn mọi thắc mắc về sức khỏe
+                  {ctaDescription}
                 </p>
               </div>
               <div>
                 <a
-                  href="tel:0984438960"
+                  href={`tel:${phoneNumber.replace(/\s/g, '')}`}
                   className="inline-block btn-primary whitespace-nowrap"
                 >
-                  Gọi ngay: 098 44 38 960
+                  {ctaButtonLabel}
                 </a>
               </div>
             </div>
@@ -97,3 +125,4 @@ const Services = () => {
 };
 
 export default Services;
+

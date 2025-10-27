@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../index.css';
+import { getBlogPosts } from '../../utils/cms';
+import { marked } from 'marked';
+import { calculateReadingTime, extractHeadings, generateBlogPostSchema, generateBreadcrumbSchema } from '../../utils/blog';
+import { Facebook, Twitter, Share2, Clock, Calendar, User, ArrowLeft, ChevronRight } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const htmlContent = marked(post.content);
+const readingTime = calculateReadingTime(post.content);
+const headings = extractHeadings(post.content);
+const currentUrl = `https://taisanh.com/blog/${post.slug}`;
+
+// Get all posts for related posts
+const allPosts = await getBlogPosts();
+const relatedPosts = allPosts
+  .filter(p => p.slug !== post.slug && p.category === post.category)
+  .slice(0, 3);
+
+// Generate schema markup
+const blogPostSchema = generateBlogPostSchema({
+  title: post.title,
+  description: post.description,
+  author: post.author,
+  date: post.date,
+  image: post.image,
+  url: currentUrl
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Trang chủ", url: "https://taisanh.com" },
+  { name: "Bài viết", url: "https://taisanh.com/blog" },
+  { name: post.title, url: currentUrl }
+]);
+
+// SEO meta tags
+const metaTitle = post.seo?.metaTitle || post.title;
+const metaDescription = post.seo?.metaDescription || post.description;
+const keywords = post.seo?.keywords || post.tags?.join(', ') || '';
+---
+
+<BaseLayout title={`${metaTitle} - Phòng Khám YHCT Tái Sanh`} description={metaDescription}>
+  <!-- SEO Meta Tags -->
+  <meta slot="head" name="keywords" content={keywords} />
+  <meta slot="head" property="og:type" content="article" />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:url" content={currentUrl} />
+  {post.image && <meta slot="head" property="og:image" content={`https://taisanh.com${post.image}`} />}
+  <meta slot="head" property="article:published_time" content={post.date} />
+  {post.updatedDate && <meta slot="head" property="article:modified_time" content={post.updatedDate} />}
+  <meta slot="head" property="article:author" content={post.author} />
+  <meta slot="head" property="article:section" content={post.category} />
+
+  <!-- Twitter Card -->
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  {post.image && <meta slot="head" name="twitter:image" content={`https://taisanh.com${post.image}`} />}
+
+  <!-- Canonical URL -->
+  <link slot="head" rel="canonical" href={post.seo?.canonicalUrl || currentUrl} />
+
+  <!-- JSON-LD Structured Data -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="min-h-screen bg-gradient-to-b from-taisan-cream/30 to-white">
+    <!-- Header spacing -->
+    <div class="h-20"></div>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-white border-b border-gray-200">
+      <div class="container-custom py-4">
+        <ol class="flex items-center gap-2 text-sm">
+          <li><a href="/" class="text-taisan hover:text-taisan-light transition-colors">Trang chủ</a></li>
+          <li class="text-gray-400">/</li>
+          <li><a href="/blog" class="text-taisan hover:text-taisan-light transition-colors">Bài viết</a></li>
+          <li class="text-gray-400">/</li>
+          <li class="text-gray-600 truncate max-w-xs">{post.title}</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="container-custom py-12 max-w-7xl">
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-8">
+          <!-- Back button -->
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-taisan hover:text-taisan-light mb-8 transition-colors group"
+          >
+            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Quay lại danh sách bài viết
+          </a>
+
+          <!-- Post header -->
+          <header class="bg-white rounded-2xl shadow-card p-8 mb-8 border border-taisan/10">
+            <!-- Category and Date -->
+            <div class="flex flex-wrap items-center gap-4 mb-6">
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-taisan bg-taisan/10 px-4 py-2 rounded-full">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                {post.category}
+              </span>
+              <span class="inline-flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {new Date(post.date).toLocaleDateString('vi-VN', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
+              <span class="inline-flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {readingTime} phút đọc
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">
+              {post.title}
+            </h1>
+
+            <!-- Description -->
+            <p class="text-xl text-gray-600 mb-6 leading-relaxed">
+              {post.description}
+            </p>
+
+            <!-- Author Info -->
+            <div class="flex items-center gap-4 pt-6 border-t border-gray-200">
+              {post.authorImage ? (
+                <img
+                  src={post.authorImage}
+                  alt={post.author}
+                  class="w-12 h-12 rounded-full object-cover"
+                />
+              ) : (
+                <div class="w-12 h-12 rounded-full bg-taisan/10 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-taisan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+              )}
+              <div>
+                <p class="text-sm text-gray-500">Tác giả</p>
+                <p class="font-semibold text-gray-900">{post.author}</p>
+              </div>
+            </div>
+          </header>
+
+          <!-- Featured image -->
+          {post.image && (
+            <div class="mb-8 rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="w-full h-auto object-cover"
+                loading="eager"
+              />
+            </div>
+          )}
+
+          <!-- Post content -->
+          <div class="bg-white rounded-2xl shadow-card p-8 md:p-12 border border-taisan/10">
+            <div
+              class="prose prose-lg max-w-none
+                prose-headings:font-serif prose-headings:text-taisan prose-headings:scroll-mt-24
+                prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8
+                prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:pb-2 prose-h2:border-b prose-h2:border-taisan/20
+                prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-6
+                prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-taisan prose-a:no-underline prose-a:font-medium hover:prose-a:text-taisan-light hover:prose-a:underline
+                prose-strong:text-gray-900 prose-strong:font-semibold
+                prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
+                prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
+                prose-li:text-gray-700 prose-li:mb-2
+                prose-blockquote:border-l-4 prose-blockquote:border-taisan prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:bg-taisan/5 prose-blockquote:py-4 prose-blockquote:my-6
+                prose-code:text-taisan prose-code:bg-taisan/10 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-lg prose-pre:my-6
+                prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
+                prose-hr:border-gray-300 prose-hr:my-8"
+              set:html={htmlContent}
+            />
+          </div>
+
+          <!-- Tags -->
+          {post.tags && post.tags.length > 0 && (
+            <div class="mt-8 pt-8 border-t border-gray-200">
+              <h3 class="text-sm font-semibold text-gray-700 mb-3">Tags:</h3>
+              <div class="flex flex-wrap gap-2">
+                {post.tags.map((tag: string) => (
+                  <span class="inline-block bg-taisan/10 text-taisan text-sm px-3 py-1 rounded-full">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Share section -->
+          <div class="mt-8 pt-8 border-t border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Chia sẻ bài viết</h3>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md font-medium"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(post.title)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md font-medium"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+                Twitter
+              </a>
+              <button
+                onclick={`navigator.share({title: '${post.title}', text: '${post.description}', url: '${currentUrl}'})`}
+                class="inline-flex items-center gap-2 bg-taisan hover:bg-taisan-light text-white px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md font-medium"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                Chia sẻ
+              </button>
+            </div>
+          </div>
+
+          <!-- Related Posts -->
+          {relatedPosts.length > 0 && (
+            <div class="mt-12">
+              <h3 class="text-2xl font-serif font-bold text-gray-900 mb-6">Bài viết liên quan</h3>
+              <div class="grid md:grid-cols-3 gap-6">
+                {relatedPosts.map((relatedPost) => (
+                  <a
+                    href={`/blog/${relatedPost.slug}`}
+                    class="group bg-white rounded-lg shadow-card overflow-hidden hover:shadow-xl transition-all border border-gray-100"
+                  >
+                    {relatedPost.image && (
+                      <img
+                        src={relatedPost.image}
+                        alt={relatedPost.title}
+                        class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
+                    <div class="p-4">
+                      <span class="text-xs font-medium text-taisan bg-taisan/10 px-2 py-1 rounded-full">
+                        {relatedPost.category}
+                      </span>
+                      <h4 class="text-base font-semibold text-gray-900 mt-2 mb-1 group-hover:text-taisan transition-colors line-clamp-2">
+                        {relatedPost.title}
+                      </h4>
+                      <p class="text-sm text-gray-600 line-clamp-2">
+                        {relatedPost.description}
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="lg:col-span-4">
+          <div class="sticky top-24 space-y-6">
+            <!-- Table of Contents -->
+            {headings.length > 0 && (
+              <div class="bg-white rounded-2xl shadow-card p-6 border border-taisan/10">
+                <h3 class="text-lg font-serif font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-taisan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                  </svg>
+                  Mục lục
+                </h3>
+                <nav class="space-y-2">
+                  {headings.map((heading) => (
+                    <a
+                      href={`#${heading.id}`}
+                      class={`block text-sm hover:text-taisan transition-colors ${
+                        heading.level === 1 ? 'font-semibold text-gray-900' :
+                        heading.level === 2 ? 'pl-4 text-gray-700' :
+                        'pl-8 text-gray-600'
+                      }`}
+                    >
+                      {heading.text}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
+
+            <!-- Author Card -->
+            <div class="bg-gradient-to-br from-taisan/5 to-taisan-cream rounded-2xl shadow-card p-6 border border-taisan/10">
+              <h3 class="text-lg font-serif font-bold text-gray-900 mb-4">Về tác giả</h3>
+              <div class="flex items-center gap-4 mb-4">
+                {post.authorImage ? (
+                  <img
+                    src={post.authorImage}
+                    alt={post.author}
+                    class="w-16 h-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <div class="w-16 h-16 rounded-full bg-taisan/20 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-taisan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                )}
+                <div>
+                  <p class="font-semibold text-gray-900">{post.author}</p>
+                  <p class="text-sm text-gray-600">Tác giả</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-700">
+                Chuyên gia về y học cổ truyền tại Phòng Khám YHCT Tái Sanh
+              </p>
+            </div>
+
+            <!-- CTA Card -->
+            <div class="bg-gradient-to-br from-taisan to-taisan-dark rounded-2xl shadow-xl p-6 text-white">
+              <h3 class="text-xl font-serif font-bold mb-3">Cần tư vấn?</h3>
+              <p class="text-white/90 mb-4 text-sm">
+                Liên hệ với chúng tôi để được tư vấn miễn phí về sức khỏe
+              </p>
+              <a
+                href="tel:0984438960"
+                class="block w-full bg-white text-taisan text-center font-semibold py-3 px-4 rounded-lg hover:bg-taisan-cream transition-colors"
+              >
+                Gọi ngay: 098 44 38 960
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+

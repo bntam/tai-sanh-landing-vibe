@@ -3,10 +3,31 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Phone, Menu, X } from "lucide-react";
 
-const Header = () => {
+interface HeaderContent {
+  shortName?: string;
+  fullName?: string;
+  navigation?: Array<{ label: string; id: string }>;
+}
+
+interface HeaderProps {
+  content?: HeaderContent;
+}
+
+const Header: React.FC<HeaderProps> = ({ content }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useIsMobile();
+
+  // Default values
+  const shortName = content?.shortName || "Tái Sanh";
+  const fullName = content?.fullName || "Phòng Khám YHCT Tái Sanh";
+  const navigation = content?.navigation || [
+    { label: "Trang chủ", id: "hero" },
+    { label: "Giới thiệu", id: "about" },
+    { label: "Dịch vụ", id: "services" },
+    { label: "Đội ngũ", id: "doctors" },
+    { label: "Liên hệ", id: "contact" }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,43 +66,22 @@ const Header = () => {
           <a href="#" className="flex items-center space-x-2">
             <img src="/uploads/logo-32x32.png" alt="Tái Sanh Logo" className="w-8 h-8" />
             <span className="text-taisan text-xl font-serif font-bold">
-              {isMobile ? "Tái Sanh" : "Phòng Khám YHCT Tái Sanh"}
+              {isMobile ? shortName : fullName}
             </span>
           </a>
 
           {/* Desktop Navigation */}
           {!isMobile && (
             <nav className="hidden md:flex items-center space-x-8">
-              <button
-                onClick={() => navigateTo("hero")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Trang chủ
-              </button>
-              <button
-                onClick={() => navigateTo("about")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Giới thiệu
-              </button>
-              <button
-                onClick={() => navigateTo("services")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Dịch vụ
-              </button>
-              <button
-                onClick={() => navigateTo("doctors")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Đội ngũ
-              </button>
-              <button
-                onClick={() => navigateTo("contact")}
-                className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
-              >
-                Liên hệ
-              </button>
+              {navigation.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => navigateTo(item.id)}
+                  className="text-foreground hover:text-taisan transition-colors font-medium link-hover"
+                >
+                  {item.label}
+                </button>
+              ))}
             </nav>
           )}
 
@@ -111,36 +111,15 @@ const Header = () => {
         >
           <div className="container-custom">
             <nav className="flex flex-col space-y-6 py-8">
-              <button
-                onClick={() => navigateTo("hero")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Trang chủ
-              </button>
-              <button
-                onClick={() => navigateTo("about")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Giới thiệu
-              </button>
-              <button
-                onClick={() => navigateTo("services")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Dịch vụ
-              </button>
-              <button
-                onClick={() => navigateTo("doctors")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Đội ngũ
-              </button>
-              <button
-                onClick={() => navigateTo("contact")}
-                className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
-              >
-                Liên hệ
-              </button>
+              {navigation.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => navigateTo(item.id)}
+                  className="text-xl font-medium hover:text-taisan transition-colors py-2 border-b border-gray-100"
+                >
+                  {item.label}
+                </button>
+              ))}
             </nav>
           </div>
         </div>

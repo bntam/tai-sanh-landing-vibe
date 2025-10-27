@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../index.css';
+import Providers from '../components/Providers';
+import IndexPage from '../components/IndexPage';
+import { getActiveNotification, getWebsiteContent, getSiteSettings } from '../utils/cms';
+import { notificationConfig } from '../config/notification';
+
+// Load all content from CMS
+const cmsNotification = await getActiveNotification();
+const notification = cmsNotification || notificationConfig;
+const websiteContent = await getWebsiteContent();
+const siteSettings = await getSiteSettings();
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": siteSettings.siteName || "Phòng Khám Y Học Cổ Truyền Tái Sanh",
+  "description": siteSettings.siteDescription || "Phòng khám y học cổ truyền uy tín tại Tuy Hòa, Phú Yên",
+  "url": "https://phongkhamtaisanh.com",
+  "telephone": siteSettings.phone || "098 44 38 960",
+  "email": siteSettings.email || "contact@phongkhamtaisanh.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteSettings.address || "228 Lê Lợi, Phường Tuy Hòa",
+    "addressLocality": "Tuy Hòa",
+    "addressRegion": "Đắk Lắk",
+    "addressCountry": "VN"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "14:00",
+    "closes": "18:00"
+  },
+  "medicalSpecialty": "Traditional Chinese Medicine",
+  "priceRange": "$$",
+  "image": "https://phongkhamtaisanh.com/uploads/news.webp"
+};
+---
+
+<BaseLayout>
+  <Providers client:load>
+    <IndexPage
+      client:load
+      notification={notification}
+      websiteContent={websiteContent}
+      siteSettings={siteSettings}
+    />
+  </Providers>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</BaseLayout>
+
