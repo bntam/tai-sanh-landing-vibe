@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ site }) => {
   </url>`).join('')}
   ${blogPosts.map(post => `
   <url>
-    <loc>${siteUrl}blog/${post.slug}</loc>
+    <loc>${siteUrl}blog/${post.id}</loc>
     <lastmod>${post.data.updatedDate ? new Date(post.data.updatedDate).toISOString() : new Date(post.data.date).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

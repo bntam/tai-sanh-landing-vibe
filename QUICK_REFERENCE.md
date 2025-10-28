@@ -24,9 +24,10 @@ npm run preview
 ## 📝 Content Management
 
 ### Access CMS Admin
-1. Visit http://localhost:4322/admin (or your-domain.com/admin in production)
-2. Login with Netlify Identity
-3. Edit content and click "Publish"
+1. Visit http://localhost:4321/admin (or your-domain.com/admin in production)
+2. For local development: Click "Login with Local Backend" (run `npx decap-server` first)
+3. For production: Login with GitHub OAuth
+4. Edit content and click "Publish"
 
 ### Edit Website Content
 
@@ -204,9 +205,10 @@ tai-sanh-landing-vibe/
 ## 🐛 Troubleshooting
 
 ### CMS Not Loading
-1. Check if Netlify Identity is configured
-2. Clear browser cache
-3. Check browser console for errors
+1. For local dev: Make sure `npx decap-server` is running
+2. For production: Check GitHub OAuth app is configured correctly
+3. Clear browser cache
+4. Check browser console for errors
 
 ### Changes Not Appearing
 1. Make sure you clicked "Publish" in CMS
@@ -264,8 +266,8 @@ npm run build
 - [ ] Test all links
 - [ ] Test on mobile devices
 - [ ] Run Lighthouse audit
-- [ ] Set up Netlify Identity for production
-- [ ] Configure custom domain
+- [ ] Set up GitHub OAuth for CMS (see DECAP_CMS_AUTH_EXPLAINED.md)
+- [ ] Configure custom domain on Cloudflare Pages
 - [ ] Test CMS in production
 - [ ] Submit sitemap to Google Search Console
 

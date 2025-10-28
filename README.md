@@ -241,15 +241,19 @@ taisan: {
 
 ## 🚀 Deployment
 
-### Netlify (Recommended)
+### Cloudflare Pages (Recommended)
 
 1. Push code to GitHub
-2. Connect repository to Netlify
+2. Connect repository to Cloudflare Pages
 3. Configure build settings:
-   - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-4. Set up Netlify Identity for CMS
+   - **Framework preset**: Astro
+   - **Build command**: `npm install && npm run build`
+   - **Build output directory**: `dist`
+   - **Node.js version**: 20.x or 22.x
+4. Set up GitHub OAuth for CMS (see `DECAP_CMS_AUTH_EXPLAINED.md`)
 5. Deploy!
+
+**For detailed deployment instructions, see `CLOUDFLARE_DEPLOYMENT.md`**
 
 See **DEPLOYMENT_CHECKLIST.md** for detailed instructions.
 
@@ -316,7 +320,7 @@ This project is proprietary and confidential.
 - Built with [Astro](https://astro.build)
 - UI components from [shadcn/ui](https://ui.shadcn.com)
 - CMS powered by [Decap CMS](https://decapcms.org)
-- Deployed on [Netlify](https://netlify.com)
+- Deployed on [Cloudflare Pages](https://pages.cloudflare.com)
 
 ---
 
