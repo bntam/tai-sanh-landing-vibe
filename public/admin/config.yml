@@ -2,8 +2,6 @@ backend:
   name: github
   repo: bntam/tai-sanh-landing-vibe
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 # Enable for local development (run: npx decap-server)
 local_backend: true

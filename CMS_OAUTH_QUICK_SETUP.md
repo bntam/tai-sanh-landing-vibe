@@ -1,8 +1,10 @@
-# 🚀 Quick Setup: Decap CMS with GitHub OAuth on Cloudflare Pages
+# 🚀 Quick Setup: Decap CMS with Direct GitHub Auth on Cloudflare Pages
 
-## ⚡ 5-Minute Setup Guide
+## ⚡ 3-Minute Setup Guide (No Netlify Required!)
 
 Follow these steps to enable the CMS admin panel on your Cloudflare Pages deployment.
+
+**NEW:** This guide uses **Direct GitHub Authentication** - no Netlify dependencies!
 
 ---
 
@@ -13,45 +15,24 @@ Follow these steps to enable the CMS admin panel on your Cloudflare Pages deploy
 3. **Fill in:**
    ```
    Application name: Decap CMS - Tái Sanh
-   Homepage URL: https://your-site.pages.dev
-   Authorization callback URL: https://api.netlify.com/auth/done
+   Homepage URL: https://phongkhamtaisanh.com
+   Authorization callback URL: https://phongkhamtaisanh.com/admin/
    ```
+
+   ⚠️ **IMPORTANT:** The callback URL is now **YOUR site** (not Netlify!)
+
 4. **Click:** "Register application"
-5. **Copy:** Client ID (shown immediately)
-6. **Click:** "Generate a new client secret"
-7. **Copy:** Client Secret (save it now - you can't see it again!)
+5. **Done!** You don't need to copy the Client ID or Secret for this method
 
 ---
 
-## Step 2: Add Environment Variables to Cloudflare Pages (2 minutes)
+## Step 2: Deploy Your Changes (1 minute)
 
-1. **Go to:** Cloudflare Dashboard → Pages → Your Project → Settings → Environment Variables
-2. **Add these two variables:**
-   
-   **Variable 1:**
-   ```
-   Name: OAUTH_GITHUB_CLIENT_ID
-   Value: [paste your Client ID from Step 1]
-   ```
-   
-   **Variable 2:**
-   ```
-   Name: OAUTH_GITHUB_CLIENT_SECRET
-   Value: [paste your Client Secret from Step 1]
-   ```
-
-3. **Important:** Set these for **both** Production and Preview environments
-4. **Click:** "Save"
-
----
-
-## Step 3: Deploy Your Changes (1 minute)
-
-The configuration files have already been updated. Just commit and push:
+The configuration files have already been updated to use **Direct GitHub Authentication**. Just commit and push:
 
 ```bash
 git add .
-git commit -m "Configure Decap CMS for Cloudflare Pages with GitHub OAuth"
+git commit -m "Switch to direct GitHub authentication (no Netlify)"
 git push
 ```
 
@@ -59,12 +40,13 @@ Wait for Cloudflare Pages to deploy (2-5 minutes).
 
 ---
 
-## Step 4: Test the CMS (30 seconds)
+## Step 3: Test the CMS (30 seconds)
 
-1. **Go to:** `https://your-site.pages.dev/admin`
+1. **Go to:** `https://phongkhamtaisanh.com/admin`
 2. **Click:** "Login with GitHub"
-3. **Authorize:** the OAuth app when prompted
-4. **Success!** You should now see the CMS dashboard
+3. **You'll be redirected to GitHub** (not Netlify!)
+4. **Authorize:** the OAuth app when prompted
+5. **Success!** You should now see the CMS dashboard
 
 ---
 
@@ -78,15 +60,15 @@ backend:
   name: github
   repo: bntam/tai-sanh-landing-vibe
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 local_backend: true  # For local development
 ```
 
+**Notice:** No `base_url` or `auth_endpoint` - this means **Direct GitHub Authentication**!
+
 ### `public/admin/index.html`
 - Removed Netlify Identity widget script
-- Now uses GitHub OAuth instead
+- Now uses Direct GitHub OAuth (no Netlify proxy)
 
 ---
 
@@ -114,17 +96,19 @@ To test the CMS locally without authentication:
 ## 🐛 Troubleshooting
 
 ### "Authentication failed"
-- Check that environment variables are set correctly in Cloudflare Pages
-- Verify the callback URL is exactly: `https://api.netlify.com/auth/done`
+- Verify the callback URL in GitHub OAuth app is: `https://phongkhamtaisanh.com/admin/`
+- Check that your GitHub account has access to the repository
 - Make sure you've deployed the latest changes
 
 ### "Cannot read repository"
 - Verify your GitHub account has access to the repository
 - Check that the repository name in `config.yml` is correct: `bntam/tai-sanh-landing-vibe`
+- Make sure the repository is public or you've authorized the OAuth app for private repos
 
 ### "Local backend not working"
 - Make sure `npx decap-server` is running in a separate terminal
 - Check that you're accessing `http://localhost:4321/admin` (not the production URL)
+- Verify `local_backend: true` is set in `config.yml`
 
 ---
 
@@ -132,29 +116,49 @@ To test the CMS locally without authentication:
 
 | Setting | Value |
 |---------|-------|
-| **Backend** | GitHub |
+| **Backend** | GitHub (Direct Auth) |
 | **Repository** | bntam/tai-sanh-landing-vibe |
 | **Branch** | main |
-| **OAuth Provider** | Netlify (for GitHub OAuth) |
-| **Callback URL** | https://api.netlify.com/auth/done |
+| **OAuth Provider** | GitHub (Direct - No Netlify!) |
+| **Callback URL** | https://phongkhamtaisanh.com/admin/ |
 | **Local Backend** | Enabled (for development) |
+| **Environment Variables** | None required! ✨ |
 
 ---
 
 ## 🔐 Security Notes
 
-- **Never commit** OAuth secrets to Git
 - **Only authorize** users who should have CMS access
 - **Review** authorized users regularly in GitHub settings
 - **Use branch protection** on your main branch
+- **No secrets needed** - Direct GitHub auth doesn't require environment variables!
+
+---
+
+## 🎯 Why This Is Better
+
+**Old Method (Netlify OAuth Proxy):**
+- ❌ Requires environment variables
+- ❌ Depends on Netlify's infrastructure
+- ❌ More complex setup
+- ❌ Extra redirect through Netlify
+
+**New Method (Direct GitHub Auth):**
+- ✅ No environment variables needed
+- ✅ No Netlify dependency
+- ✅ Simpler setup
+- ✅ Direct authentication with GitHub
+- ✅ Faster (one less redirect)
 
 ---
 
 ## 📚 Need More Help?
 
-See the detailed guide: `DECAP_CMS_CLOUDFLARE_SETUP.md`
+See the detailed guides:
+- `DECAP_CMS_AUTH_EXPLAINED.md` - Complete explanation of authentication methods
+- `DECAP_CMS_CLOUDFLARE_SETUP.md` - Comprehensive setup guide
 
 ---
 
-**That's it!** Your CMS should now work on Cloudflare Pages. 🎉
+**That's it!** Your CMS now uses Direct GitHub Authentication - no Netlify required! 🎉
 
