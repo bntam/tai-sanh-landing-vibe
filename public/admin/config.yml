@@ -2,6 +2,7 @@ backend:
   name: github
   repo: bntam/tai-sanh-landing-vibe
   branch: main
+  base_url: "https://decap.phongkhamtaisanh.com"  # Replace with your OAuth proxy URL
 
 # Enable for local development (run: npx decap-server)
 local_backend: true

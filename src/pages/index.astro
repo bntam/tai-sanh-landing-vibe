@@ -4,11 +4,9 @@ import '../index.css';
 import Providers from '../components/Providers';
 import IndexPage from '../components/IndexPage';
 import { getActiveNotification, getWebsiteContent, getSiteSettings } from '../utils/cms';
-import { notificationConfig } from '../config/notification';
 
 // Load all content from CMS
-const cmsNotification = await getActiveNotification();
-const notification = cmsNotification || notificationConfig;
+const notification = await getActiveNotification();
 const websiteContent = await getWebsiteContent();
 const siteSettings = await getSiteSettings();
 
