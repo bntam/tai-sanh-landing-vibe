@@ -10,6 +10,11 @@ lerna-debug.log*
 # Dependencies
 node_modules
 
+# Lock files (use npm only, not bun)
+bun.lockb
+yarn.lock
+pnpm-lock.yaml
+
 # Build output
 dist
 dist-ssr

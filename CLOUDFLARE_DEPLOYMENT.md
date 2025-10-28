@@ -200,7 +200,43 @@ The error occurs because:
 
 ## Troubleshooting
 
-### Build Fails with Lockfile Error
+### ⚠️ Cloudflare Pages Uses Bun Instead of npm (CRITICAL)
+
+**Error:**
+```
+Detected the following tools from environment: npm@10.9.2, bun@1.2.15, nodejs@22.16.0
+Installing project dependencies: bun install --frozen-lockfile
+error: lockfile had changes, but lockfile is frozen
+```
+
+**Problem:**
+Even though your build command specifies `npm install && npm run build`, Cloudflare Pages automatically detects `bun.lockb` file and uses Bun instead of npm.
+
+**Solution:**
+The `bun.lockb` file has been removed from the repository. After committing this change, Cloudflare Pages will use npm as specified in your build command.
+
+**Steps:**
+1. Commit the changes (bun.lockb removed):
+   ```bash
+   git add .
+   git commit -m "Remove bun.lockb to force npm usage on Cloudflare Pages"
+   git push
+   ```
+
+2. Trigger a new deployment in Cloudflare Pages
+
+3. Verify the build log shows:
+   ```
+   Installing project dependencies: npm install
+   ```
+   (NOT `bun install --frozen-lockfile`)
+
+**Prevention:**
+The `.gitignore` file has been updated to prevent `bun.lockb` from being committed in the future.
+
+---
+
+### Build Fails with Lockfile Error (Legacy Issue)
 
 **Error:**
 ```
@@ -208,14 +244,10 @@ error: lockfile had changes, but lockfile is frozen
 ```
 
 **Solution:**
-Change build command from:
-```bash
-bun install --frozen-lockfile && bun run build
-```
-To:
-```bash
-npm install && npm run build
-```
+This should no longer occur after removing `bun.lockb`. If it still happens:
+1. Ensure `bun.lockb` is not in your repository
+2. Verify build command is: `npm install && npm run build`
+3. Check that `.gitignore` includes `bun.lockb`
 
 ### Build Fails with Peer Dependency Warnings
 
