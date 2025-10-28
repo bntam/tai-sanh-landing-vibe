@@ -177,9 +177,23 @@ The error occurs because:
    Root directory: (leave empty)
    ```
 
-3. **Environment Variables** (if needed)
-   - Usually none required for basic deployment
-   - Click "Add variable" if you need any
+3. **Environment Variables**
+
+   **For CMS Authentication (Required for `/admin` access):**
+
+   You need to add GitHub OAuth credentials to enable the CMS admin panel:
+
+   ```
+   OAUTH_GITHUB_CLIENT_ID = your_github_client_id
+   OAUTH_GITHUB_CLIENT_SECRET = your_github_client_secret
+   ```
+
+   **How to get these values:**
+   - See the detailed guide in `DECAP_CMS_CLOUDFLARE_SETUP.md`
+   - You need to create a GitHub OAuth app first
+   - Add these variables for both Production and Preview environments
+
+   **Note:** Without these environment variables, the `/admin` page will not work!
 
 ### Step 4: Deploy
 
@@ -312,7 +326,10 @@ After successful deployment, verify:
 
 ### ✅ CMS Admin
 - [ ] Admin panel loads: `https://your-site.pages.dev/admin`
-- [ ] Can login (if authentication enabled)
+- [ ] **IMPORTANT:** CMS requires GitHub OAuth setup - see `DECAP_CMS_CLOUDFLARE_SETUP.md`
+- [ ] GitHub OAuth app created and configured
+- [ ] Environment variables added to Cloudflare Pages
+- [ ] Can login with GitHub
 - [ ] Can edit content
 - [ ] Changes save correctly
 
