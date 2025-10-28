@@ -1,3 +1,5 @@
+site_url: https://phongkhamtaisanh.com
+
 backend:
   name: github
   repo: bntam/tai-sanh-landing-vibe
