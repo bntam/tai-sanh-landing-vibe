@@ -1,0 +1,22 @@
+# Cloudflare Pages configuration for Wrangler CLI deployment
+# This file is optional - only needed if deploying via Wrangler CLI
+# For dashboard deployment, configure settings in Cloudflare Pages UI
+
+name = "phongkham-taisanh"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm install && npm run build"
+cwd = "."
+watch_dirs = ["src", "public"]
+
+[build.upload]
+format = "service-worker"
+
+# Pages configuration
+pages_build_output_dir = "dist"
+
+# Environment variables (optional)
+# [env.production.vars]
+# NODE_VERSION = "20"
+
